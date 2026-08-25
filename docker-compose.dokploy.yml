@@ -10,13 +10,16 @@ services:
     networks:
       - dokploy-network
     environment:
+      TWS_USERID: ${IBKR_USERNAME}
+      TWS_PASSWORD: ${IBKR_PASSWORD}
       TRADING_MODE: ${IBKR_TRADING_MODE:-live}
-      READ_ONLY_API: "yes"
       TWS_API_PORT: ${IBKR_TWS_PORT:-4001}
-      IBKR_USERNAME: ${IBKR_USERNAME}
-      IBKR_PASSWORD: ${IBKR_PASSWORD}
+      READ_ONLY_API: "yes"
+      TWOFA_TIMEOUT_ACTION: "restart"
+      RELOGIN_AFTER_TWOFA_TIMEOUT: "yes"
+      EXISTING_SESSION_DETECTED_ACTION: "primary"
     volumes:
-      - ibkr-gateway-settings:/home/gateway/Jts
+      - ibkr-gateway-settings:/root/Jts
 
 volumes:
   ibkr-gateway-settings:
