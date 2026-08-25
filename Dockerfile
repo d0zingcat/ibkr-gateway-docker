@@ -1,8 +1,8 @@
 # syntax=docker/dockerfile:1
 FROM debian:bookworm-slim AS installer
 
-ARG IBC_VERSION=3.18.0
-ARG IBC_SHA256=a59f5be6f9e2e6044733eb7b2fef450ddb4f74d08ce1e51b14a2a11b6d92374b
+ARG IBC_VERSION=3.24.2
+ARG IBC_SHA256=cc097ca1dfa75413a5fbe02e4743050af15f3308eb6a97c769b3cff9850c80c5
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
