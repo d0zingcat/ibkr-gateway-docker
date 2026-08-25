@@ -7,25 +7,21 @@ services:
     restart: unless-stopped
     security_opt:
       - no-new-privileges:true
-    cap_drop:
-      - ALL
     networks:
-      - broker-network
+      - dokploy-network
     environment:
       TRADING_MODE: ${IBKR_TRADING_MODE:-live}
       READ_ONLY_API: "yes"
-      TWS_API_PORT: 4001
+      TWS_API_PORT: ${IBKR_TWS_PORT:-4001}
       IBKR_USERNAME: ${IBKR_USERNAME}
       IBKR_PASSWORD: ${IBKR_PASSWORD}
     volumes:
       - ibkr-gateway-settings:/home/gateway/Jts
-      - goldmachine-ibkr-secrets:/run/ibkr-secrets:ro
 
 volumes:
   ibkr-gateway-settings:
-  goldmachine-ibkr-secrets:
-    external: true
 
 networks:
-  broker-network:
+  dokploy-network:
     external: true
+    name: ${DOKPLOY_NETWORK:-dokploy-network}
