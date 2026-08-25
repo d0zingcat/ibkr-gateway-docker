@@ -1,0 +1,17 @@
+services:
+  ibkr-gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ibkr-gateway-local
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:4001:4001"
+    environment:
+      IBKR_USERNAME: ${IBKR_USERNAME}
+      IBKR_PASSWORD: ${IBKR_PASSWORD}
+      TRADING_MODE: ${IBKR_TRADING_MODE:-live}
+      READ_ONLY_API: "yes"
+      TWS_API_PORT: 4001
+    volumes:
+      - ./data/Jts:/home/gateway/Jts
